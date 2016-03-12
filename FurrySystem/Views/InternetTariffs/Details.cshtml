@@ -1,0 +1,34 @@
+﻿@model FurrySystem.Models.InternetTariff
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+	<h4>Internet Tariff</h4>
+	<hr/>
+	<dl class="dl-horizontal">
+		@{
+			foreach (ModelMetadata property in ViewData.ModelMetadata.Properties)
+			{
+				if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase))
+				{
+					continue;
+				}
+
+				<dt>
+					@Html.DisplayName(property.DisplayName ?? property.PropertyName)
+				</dt>
+				<dd>
+					@Html.Display(property.PropertyName)
+				</dd>
+			}
+		}
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
+	@Html.ActionLink("Back to List", "Index")
+</p>

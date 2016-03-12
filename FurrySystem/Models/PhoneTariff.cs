@@ -2,7 +2,7 @@
 
 namespace FurrySystem.Models
 {
-	public class InternetTariff
+	public class PhoneTariff
 	{
 		[Key]
 		public virtual int Id { get; set; }
@@ -11,6 +11,6 @@ namespace FurrySystem.Models
 		public virtual string Name { get; set; }
 
 		[Required]
-		public virtual int BandwidthLimit { get; set; }
+		public virtual bool HasLimit { get; set; }
 	}
 }

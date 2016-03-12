@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FurrySystem.Models
@@ -13,6 +12,8 @@ namespace FurrySystem.Models
 
 		public DbSet<Customer> Customers { get; set; }
 		public DbSet<CustomerInternetOrder> CustomerInternetOrders { get; set; }
+		public DbSet<CustomerPhoneOrder> CustomerPhoneOrders { get; set; }
 		public DbSet<InternetTariff> InternetTariffs { get; set; }
+		public DbSet<PhoneTariff> PhoneTariffs { get; set; }
 	}
 }

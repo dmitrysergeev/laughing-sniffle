@@ -1,7 +1,7 @@
-﻿@model dynamic
+﻿@model FurrySystem.Models.Customer
 
 @{
-	foreach (ModelMetadata property in Model.Properties)
+	foreach (ModelMetadata property in ViewData.ModelMetadata.Properties)
 	{
 		if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase))
 		{
@@ -12,7 +12,7 @@
 			@Html.DisplayName(property.DisplayName ?? property.PropertyName)
 		</dt>
 		<dd>
-			@Html.Display(property.PropertyName)
+			@Html.Display(property.PropertyName, property)
 		</dd>
 	}
 }

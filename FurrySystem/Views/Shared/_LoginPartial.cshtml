@@ -1,13 +1,20 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using FurrySystem.Models
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+
 @if (Request.IsAuthenticated)
 {
 	using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"}))
 	{
 		@Html.AntiForgeryToken()
 
+		var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+		var currentUser = manager.FindById(User.Identity.GetUserId());
+		var fullName = currentUser.FullName;
+
 		<ul class="nav navbar-nav navbar-right">
 			<li>
-				@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", null, new {title = "Manage"})
+				@Html.ActionLink("Hello, " + (fullName ?? User.Identity.GetUserName()) + "!", "Manage", "Account", null, new {title = "Manage"})
 			</li>
 			<li>
 				<a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>

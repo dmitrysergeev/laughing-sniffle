@@ -7,24 +7,13 @@ using FurrySystem.Models;
 namespace FurrySystem.Controllers
 {
 	[Authorize]
-	public class CustomersController : Controller
+	public class PhoneTariffsController : Controller
 	{
 		private readonly ApplicationDbContext db = new ApplicationDbContext();
-		private readonly CustomerDetailsModelBuilder customerDetailsModelBuilder;
 
-		public CustomersController()
+		public ActionResult Index()
 		{
-			customerDetailsModelBuilder = new CustomerDetailsModelBuilder(db);
-		}
-
-		public ActionResult Index(CustomersSearch.Type? searchType, string query)
-		{
-			var customers = db.Customers.ToList();
-
-			if(!searchType.HasValue || searchType.Value == CustomersSearch.Type.None || string.IsNullOrEmpty(query))
-				return View(customers);
-
-			return View(CustomersSearch.FilterCustomers(customers, searchType.Value, query));
+			return View(db.PhoneTariffs.ToList());
 		}
 
 		public ActionResult Details(int? id)
@@ -33,12 +22,12 @@ namespace FurrySystem.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			var model = customerDetailsModelBuilder.Build(id.Value);
-			if (model.Customer == null)
+			var phoneTariff = db.PhoneTariffs.Find(id);
+			if (phoneTariff == null)
 			{
 				return HttpNotFound();
 			}
-			return View(model);
+			return View(phoneTariff);
 		}
 
 		public ActionResult Create()
@@ -48,16 +37,16 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "Id,Inn,Name,Activity,ContactPerson,Email,Address,LegalAddress,HeadPosition,Fio")] Customer customer)
+		public ActionResult Create([Bind(Include = "Id,Name,HasLimit")] PhoneTariff phoneTariff)
 		{
 			if (ModelState.IsValid)
 			{
-				db.Customers.Add(customer);
+				db.PhoneTariffs.Add(phoneTariff);
 				db.SaveChanges();
 				return RedirectToAction("Index");
 			}
 
-			return View(customer);
+			return View(phoneTariff);
 		}
 
 		public ActionResult Edit(int? id)
@@ -66,25 +55,25 @@ namespace FurrySystem.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			var customer = db.Customers.Find(id);
-			if (customer == null)
+			var phoneTariff = db.PhoneTariffs.Find(id);
+			if (phoneTariff == null)
 			{
 				return HttpNotFound();
 			}
-			return View(customer);
+			return View(phoneTariff);
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Inn,Name,Activity,ContactPerson,Email,Address,LegalAddress,HeadPosition,Fio")] Customer customer)
+		public ActionResult Edit([Bind(Include = "Id,Name,HasLimit")] PhoneTariff phoneTariff)
 		{
 			if (ModelState.IsValid)
 			{
-				db.Entry(customer).State = EntityState.Modified;
+				db.Entry(phoneTariff).State = EntityState.Modified;
 				db.SaveChanges();
 				return RedirectToAction("Index");
 			}
-			return View(customer);
+			return View(phoneTariff);
 		}
 
 		public ActionResult Delete(int? id)
@@ -93,21 +82,20 @@ namespace FurrySystem.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			var customer = db.Customers.Find(id);
-			if (customer == null)
+			var phoneTariff = db.PhoneTariffs.Find(id);
+			if (phoneTariff == null)
 			{
 				return HttpNotFound();
 			}
-			return View(customer);
+			return View(phoneTariff);
 		}
 
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)
 		{
-			var customer = db.Customers.Find(id);
-			customer.IsDeleted = true;
-			//db.Customers.Remove(customer);
+			var phoneTariff = db.PhoneTariffs.Find(id);
+			db.PhoneTariffs.Remove(phoneTariff);
 			db.SaveChanges();
 			return RedirectToAction("Index");
 		}

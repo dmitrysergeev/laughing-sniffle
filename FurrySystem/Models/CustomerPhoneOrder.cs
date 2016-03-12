@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace FurrySystem.Models
 {
-	public class CustomerInternetOrder
+	public class CustomerPhoneOrder
 	{
 		[Key]
 		public virtual int Id { get; set; }
@@ -18,52 +18,52 @@ namespace FurrySystem.Models
 		public virtual Customer Customer { get; set; }
 
 		[Required]
-		public virtual InternetTariff Tariff { get; set; }
+		public virtual PhoneTariff Tariff { get; set; }
 
 		[Required]
-		public virtual bool AddRouter { get; set; }
+		public virtual bool IsIpTelephone { get; set; }
 
 		[Required]
 		public virtual bool Disabled { get; set; }
 	}
 
-	public class CustomerInternetOrderModel
+	public class CustomerPhoneOrderModel
 	{
 		public int CustomerId { get; set; }
 		public int TariffId { get; set; }
-		public bool AddRouter { get; set; }
-		public IEnumerable<InternetTariff> Tariffs { get; set; }
+		public bool IsIpTelephone { get; set; }
+		public IEnumerable<PhoneTariff> Tariffs { get; set; }
 	}
 
-	public class CustomerInternetOrderModelBuilder
+	public class CustomerPhoneOrderModelBuilder
 	{
 		private readonly ApplicationDbContext dbContext;
 
-		public CustomerInternetOrderModelBuilder(ApplicationDbContext dbContext)
+		public CustomerPhoneOrderModelBuilder(ApplicationDbContext dbContext)
 		{
 			this.dbContext = dbContext;
 		}
 
-		public CustomerInternetOrderModel Build(int customerId)
+		public CustomerPhoneOrderModel Build(int customerId)
 		{
-			return new CustomerInternetOrderModel
+			return new CustomerPhoneOrderModel
 			{
 				CustomerId = customerId,
-				Tariffs = dbContext.InternetTariffs.ToList()
+				Tariffs = dbContext.PhoneTariffs.ToList()
 			};
 		}
 
-		public CustomerInternetOrder BuildCustomerInternetOrder(CustomerInternetOrderModel model)
+		public CustomerPhoneOrder BuildCustomerPhoneOrder(CustomerPhoneOrderModel model)
 		{
-			var tariff = dbContext.InternetTariffs.Find(model.TariffId);
+			var tariff = dbContext.PhoneTariffs.Find(model.TariffId);
 			var customer = dbContext.Customers.Find(model.CustomerId);
 
-			return new CustomerInternetOrder
+			return new CustomerPhoneOrder
 			{
 				OrderDate = DateTime.Now,
 				Tariff = tariff,
 				Customer = customer,
-				AddRouter = model.AddRouter,
+				IsIpTelephone = model.IsIpTelephone,
 				Disabled = false
 			};
 		}

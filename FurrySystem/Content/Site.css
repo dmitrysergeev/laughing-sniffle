@@ -36,3 +36,16 @@ h1.logo {
 	height: 71px;
 	text-indent: -9999px; /* hides the link text */
 }
+
+.search-type {
+	margin: 0 10px;
+	height: 26px;
+}
+
+.mlm {
+	margin-left: 10px;
+}
+
+.mtxl {
+	margin-top: 20px;
+}

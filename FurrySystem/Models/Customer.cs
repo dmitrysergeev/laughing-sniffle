@@ -1,17 +1,40 @@
-﻿namespace FurrySystem.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FurrySystem.Models
 {
 	public class Customer
 	{
-		public int Id { get; set; }
-		public string Inn { get; set; }
-		public string Name { get; set; }
-		public string Activity { get; set; }
-		public string ContactPerson { get; set; }
-		public string Email { get; set; }
-		public string Address { get; set; }
-		public string LegalAddress { get; set; }
-		public string HeadPosition { get; set; }
-		public string Fio { get; set; }
-		public bool IsDeleted { get; set; }
+		[Key]
+		public virtual int Id { get; set; }
+
+		[Required]
+		public virtual string Inn { get; set; }
+
+		[Required]
+		public virtual string Name { get; set; }
+
+		[Required]
+		public virtual string Activity { get; set; }
+
+		[Required]
+		public virtual string ContactPerson { get; set; }
+
+		[Required]
+		public virtual string Email { get; set; }
+
+		[Required]
+		public virtual string Address { get; set; }
+
+		[Required]
+		public virtual string LegalAddress { get; set; }
+
+		[Required]
+		public virtual string HeadPosition { get; set; }
+
+		[Required]
+		public virtual string Fio { get; set; }
+
+		[Required]
+		public virtual bool IsDeleted { get; set; }
 	}
 }

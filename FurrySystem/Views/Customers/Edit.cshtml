@@ -16,80 +16,24 @@
 		<hr/>
 		@Html.ValidationSummary(true)
 		@Html.HiddenFor(model => model.Id)
-		@Html.HiddenFor(model => model.IsDeleted)
 
-		<div class="form-group">
-			@Html.LabelFor(model => model.Inn, new {@class = "control-label col-md-2"})
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Inn)
-				@Html.ValidationMessageFor(model => model.Inn)
-			</div>
-		</div>
+		@{
+			foreach (ModelMetadata property in ViewData.ModelMetadata.Properties)
+			{
+				if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase))
+				{
+					continue;
+				}
 
-		<div class="form-group">
-			@Html.LabelFor(model => model.Name, new {@class = "control-label col-md-2"})
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Name)
-				@Html.ValidationMessageFor(model => model.Name)
-			</div>
-		</div>
-
-		<div class="form-group">
-			@Html.LabelFor(model => model.Activity, new {@class = "control-label col-md-2"})
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Activity)
-				@Html.ValidationMessageFor(model => model.Activity)
-			</div>
-		</div>
-
-		<div class="form-group">
-			@Html.LabelFor(model => model.ContactPerson, new {@class = "control-label col-md-2"})
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.ContactPerson)
-				@Html.ValidationMessageFor(model => model.ContactPerson)
-			</div>
-		</div>
-
-		<div class="form-group">
-			@Html.LabelFor(model => model.Email, new {@class = "control-label col-md-2"})
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Email)
-				@Html.ValidationMessageFor(model => model.Email)
-			</div>
-		</div>
-
-		<div class="form-group">
-			@Html.LabelFor(model => model.Address, new {@class = "control-label col-md-2"})
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Address)
-				@Html.ValidationMessageFor(model => model.Address)
-			</div>
-		</div>
-
-		<div class="form-group">
-			@Html.LabelFor(model => model.LegalAddress, new {@class = "control-label col-md-2"})
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.LegalAddress)
-				@Html.ValidationMessageFor(model => model.LegalAddress)
-			</div>
-		</div>
-
-		<div class="form-group">
-			@Html.LabelFor(model => model.HeadPosition, new {@class = "control-label col-md-2"})
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.HeadPosition)
-				@Html.ValidationMessageFor(model => model.HeadPosition)
-			</div>
-		</div>
-
-		<div class="form-group">
-			@Html.LabelFor(model => model.Fio, new {@class = "control-label col-md-2"})
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Fio)
-				@Html.ValidationMessageFor(model => model.Fio)
-			</div>
-		</div>
-
+				<div class="form-group">
+					@Html.Label(property.DisplayName ?? property.PropertyName, new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.Editor(property.PropertyName)
+						@Html.ValidationMessage(property.PropertyName)
+					</div>
+				</div>
+			}
+		}
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<input type="submit" value="Save" class="btn btn-default"/>

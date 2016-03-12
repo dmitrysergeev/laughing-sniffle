@@ -1,4 +1,4 @@
-﻿@model FurrySystem.Models.Customer
+﻿@model FurrySystem.Models.InternetTariff
 
 @{
 	ViewBag.Title = "Delete";
@@ -8,14 +8,13 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-	<h4>Customer</h4>
+	<h4>Internet Tariff</h4>
 	<hr/>
 	<dl class="dl-horizontal">
 		@{
 			foreach (ModelMetadata property in ViewData.ModelMetadata.Properties)
 			{
-				if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase) ||
-					string.Equals(property.PropertyName, "IsDeleted", StringComparison.InvariantCultureIgnoreCase))
+				if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase))
 				{
 					continue;
 				}
