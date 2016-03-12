@@ -1,0 +1,19 @@
+﻿@model dynamic
+
+@{
+	foreach (ModelMetadata property in Model.Properties)
+	{
+		if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase))
+		{
+			continue;
+		}
+
+		<div class="form-group">
+			@Html.Label(property.DisplayName ?? property.PropertyName, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.Editor(property.PropertyName)
+				@Html.ValidationMessage(property.PropertyName)
+			</div>
+		</div>
+	}
+}

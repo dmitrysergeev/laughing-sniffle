@@ -1,0 +1,18 @@
+﻿@model dynamic
+
+@{
+	foreach (ModelMetadata property in Model.Properties)
+	{
+		if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase))
+		{
+			continue;
+		}
+
+		<dt>
+			@Html.DisplayName(property.DisplayName ?? property.PropertyName)
+		</dt>
+		<dd>
+			@Html.Display(property.PropertyName)
+		</dd>
+	}
+}

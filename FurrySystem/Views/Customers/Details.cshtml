@@ -1,0 +1,92 @@
+﻿@model FurrySystem.Models.Customer
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+	<h4>Movie</h4>
+	<hr/>
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Inn)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Inn)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Activity)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Activity)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.ContactPerson)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.ContactPerson)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Email)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Email)
+		</dd>
+
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Address)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Address)
+		</dd>
+
+
+		<dt>
+			@Html.DisplayNameFor(model => model.LegalAddress)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.LegalAddress)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.HeadPosition)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.HeadPosition)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Fio)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Fio)
+		</dd>
+
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
+	@Html.ActionLink("Back to List", "Index")
+</p>
