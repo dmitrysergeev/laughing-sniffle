@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using FurrySystem.DataLayer;
 using FurrySystem.Models;
 
 namespace FurrySystem.Controllers

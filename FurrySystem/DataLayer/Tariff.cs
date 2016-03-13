@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FurrySystem.Models
+namespace FurrySystem.DataLayer
 {
-	public class PhoneTariff
+	public class Tariff
 	{
 		[Key]
 		public virtual int Id { get; set; }
@@ -11,6 +11,6 @@ namespace FurrySystem.Models
 		public virtual string Name { get; set; }
 
 		[Required]
-		public virtual bool HasLimit { get; set; }
+		public virtual bool IsDeleted { get; set; }
 	}
 }

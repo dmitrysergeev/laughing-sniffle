@@ -1,4 +1,4 @@
-﻿@model FurrySystem.Models.InternetTariff
+﻿@model FurrySystem.DataLayer.InternetTariff
 
 @{
 	ViewBag.Title = "Delete";
@@ -14,7 +14,8 @@
 		@{
 			foreach (ModelMetadata property in ViewData.ModelMetadata.Properties)
 			{
-				if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase))
+				if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase) ||
+					string.Equals(property.PropertyName, "IsDeleted", StringComparison.InvariantCultureIgnoreCase))
 				{
 					continue;
 				}

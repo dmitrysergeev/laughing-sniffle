@@ -12,6 +12,9 @@
 	<dl class="dl-horizontal">
 		@Html.Partial("_CustomerDetailsPartial", Model.Customer)
 	</dl>
+	<p>
+		@Html.ActionLink("Edit", "Edit", new {id = Model.Customer.Id})
+	</p>
 
 	<hr/>
 
@@ -19,15 +22,20 @@
 	@Html.Partial("_CustomerInternetOrders", Model.CustomerInternetOrders)
 	<p>@Html.ActionLink("Add new", "CreateInternetOrder", "CustomersOrders", new {id = Model.Customer.Id}, null)</p>
 
-	<hr />
+	<hr/>
 
 	<h4>Phone orders</h4>
 	@Html.Partial("_CustomerPhoneOrders", Model.CustomerPhoneOrders)
-	<p>@Html.ActionLink("Add new", "CreatePhoneOrder", "CustomersOrders", new { id = Model.Customer.Id }, null)</p>
+	<p>@Html.ActionLink("Add new", "CreatePhoneOrder", "CustomersOrders", new {id = Model.Customer.Id}, null)</p>
 
+	<hr/>
+
+	<h4>Tv orders</h4>
+	@Html.Partial("_CustomerTvOrders", Model.CustomerTvOrders)
+	<p>@Html.ActionLink("Add new", "CreateTvOrder", "CustomersOrders", new {id = Model.Customer.Id}, null)</p>
 
 </div>
+<br/>
 <p>
-	@Html.ActionLink("Edit", "Edit", new {id = Model.Customer.Id}) |
 	@Html.ActionLink("Back to List", "Index")
 </p>

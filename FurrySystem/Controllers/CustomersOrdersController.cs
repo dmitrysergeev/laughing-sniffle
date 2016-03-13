@@ -1,8 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using FurrySystem.Models;
+using FurrySystem.DataLayer;
+using FurrySystem.Models.Orders;
 
 namespace FurrySystem.Controllers
 {
@@ -12,11 +14,13 @@ namespace FurrySystem.Controllers
 		private readonly ApplicationDbContext db = new ApplicationDbContext();
 		private readonly CustomerInternetOrderModelBuilder internetOrderModelBuilder;
 		private readonly CustomerPhoneOrderModelBuilder phoneOrderModelBuilder;
+		private readonly CustomerTvOrderModelBuilder tvOrderModelBuilder;
 
 		public CustomersOrdersController()
 		{
 			internetOrderModelBuilder = new CustomerInternetOrderModelBuilder(db);
 			phoneOrderModelBuilder = new CustomerPhoneOrderModelBuilder(db);
+			tvOrderModelBuilder = new CustomerTvOrderModelBuilder(db);
 		}
 
 		#region Internet
@@ -67,8 +71,7 @@ namespace FurrySystem.Controllers
 			}
 
 			order.Disabled = true;
-			db.CustomerInternetOrders.Attach(order);
-			db.Entry(order).Property(x => x.Disabled).IsModified = true;
+			order.DisabledDate = DateTime.Now;
 			db.SaveChanges();
 
 			if (customerId.HasValue)
@@ -127,8 +130,9 @@ namespace FurrySystem.Controllers
 			}
 
 			order.Disabled = true;
-			db.CustomerPhoneOrders.Attach(order);
-			db.Entry(order).Property(x => x.Disabled).IsModified = true;
+			order.DisabledDate = DateTime.Now;
+			//db.CustomerPhoneOrders.Attach(order);
+			//db.Entry(order).Property(x => x.Disabled).IsModified = true;
 			db.SaveChanges();
 
 			if (customerId.HasValue)
@@ -138,6 +142,68 @@ namespace FurrySystem.Controllers
 		}
 
 		#endregion
+
+
+		#region Tv
+		public ActionResult CreateTvOrder(int? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			var customer = db.Customers.Find(id);
+			if (customer == null)
+			{
+				return HttpNotFound();
+			}
+			var model = tvOrderModelBuilder.Build(id.Value);
+			return View("CreateTvOrder", model);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult CreateTvOrder([Bind(Include = "CustomerId")] CustomerTvOrderModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var order = tvOrderModelBuilder.BuildCustomerTvOrder(model);
+				db.CustomerTvOrders.Add(order);
+				db.SaveChanges();
+			}
+
+			return RedirectToAction("Details", "Customers", new { id = model.CustomerId });
+		}
+
+		[HttpPost, ActionName("DeleteTvOrder")]
+		[ValidateAntiForgeryToken]
+		public ActionResult DeleteTvOrder(int? id, int? customerId)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			var order = db.CustomerTvOrders
+				.Include(x => x.Customer)
+				.FirstOrDefault(x => x.Id == id);
+			if (order == null)
+			{
+				return HttpNotFound();
+			}
+
+			order.Disabled = true;
+			order.DisabledDate = DateTime.Now;
+			//db.CustomerPhoneOrders.Attach(order);
+			//db.Entry(order).Property(x => x.Disabled).IsModified = true;
+			db.SaveChanges();
+
+			if (customerId.HasValue)
+				return RedirectToAction("Details", "Customers", new { id = customerId });
+
+			return RedirectToAction("Index", "Customers");
+		}
+
+		#endregion
+
 
 		protected override void Dispose(bool disposing)
 		{

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FurrySystem.Models.CustomerPhoneOrder>
+﻿@model IEnumerable<FurrySystem.DataLayer.CustomerPhoneOrder>
 
 @{
 	<table class="table">
@@ -15,7 +15,10 @@
 			<th>
 				@Html.DisplayNameFor(model => model.Disabled)
 			</th>
-			<th></th>
+			<th>
+				@Html.DisplayNameFor(model => model.DisabledDate)
+			</th>
+			<th class="controls-slim"></th>
 		</tr>
 
 		@foreach (var item in Model)
@@ -34,13 +37,16 @@
 					@Html.DisplayFor(modelItem => item.Disabled)
 				</td>
 				<td>
+					@Html.DisplayFor(modelItem => item.DisabledDate)
+				</td>
+				<td>
 					@if (!item.Disabled)
 					{
-						using (Html.BeginForm("DeletePhoneOrder", "CustomersOrders", new {id = item.Id}))
+						using (Html.BeginForm("DeletePhoneOrder", "CustomersOrders", new { id = item.Id }))
 						{
 							@Html.AntiForgeryToken()
 							@Html.Hidden("customerId", item.Customer.Id)
-							<input type="submit" value="Disable" class="btn btn-default"/>
+							<input type="submit" value="Disable" class="btn btn-default" />
 						}
 					}
 				</td>

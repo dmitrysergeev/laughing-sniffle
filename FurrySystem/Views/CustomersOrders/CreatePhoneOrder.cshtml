@@ -1,4 +1,4 @@
-﻿@model FurrySystem.Models.CustomerPhoneOrderModel
+﻿@model FurrySystem.Models.Orders.CustomerPhoneOrderModel
 
 @{
 	ViewBag.Title = "Create";
@@ -11,7 +11,7 @@
 	@Html.AntiForgeryToken()
 
 	<div class="form-horizontal">
-		<h4>Internet order</h4>
+		<h4>Phone order</h4>
 		<hr />
 		@Html.ValidationSummary(true)
 		@Html.HiddenFor(x => x.CustomerId)

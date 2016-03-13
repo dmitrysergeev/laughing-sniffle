@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using FurrySystem.DataLayer;
 
 namespace FurrySystem.Models
 {
@@ -9,6 +10,7 @@ namespace FurrySystem.Models
 		public Customer Customer { get; set; }
 		public IEnumerable<CustomerInternetOrder> CustomerInternetOrders { get; set; }
 		public IEnumerable<CustomerPhoneOrder> CustomerPhoneOrders { get; set; }
+		public IEnumerable<CustomerTvOrder> CustomerTvOrders { get; set; }
 	}
 
 	public class CustomerDetailsModelBuilder
@@ -34,12 +36,17 @@ namespace FurrySystem.Models
 				.Include(x => x.Customer)
 				.Where(x => x.Customer.Id == customerId)
 				.ToList();
+			var customerTvOrders = dbContext.CustomerTvOrders
+				.Include(x => x.Customer)
+				.Where(x => x.Customer.Id == customerId)
+				.ToList();
 
 			return new CustomerDetailsModel
 			{
 				Customer = customer,
 				CustomerInternetOrders = customerInternetOrders,
-				CustomerPhoneOrders = customerPhoneOrders
+				CustomerPhoneOrders = customerPhoneOrders,
+				CustomerTvOrders = customerTvOrders
 			};
 		}
 	}

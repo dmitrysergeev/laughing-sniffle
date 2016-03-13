@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using FurrySystem.Models;
+using FurrySystem.DataLayer;
 
 namespace FurrySystem.Controllers
 {
@@ -37,7 +37,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "Id,Name,HasLimit")] PhoneTariff phoneTariff)
+		public ActionResult Create([Bind(Include = "Id,Name,HasLimit,IsDeleted")] PhoneTariff phoneTariff)
 		{
 			if (ModelState.IsValid)
 			{
@@ -65,7 +65,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Name,HasLimit")] PhoneTariff phoneTariff)
+		public ActionResult Edit([Bind(Include = "Id,Name,HasLimit,IsDeleted")] PhoneTariff phoneTariff)
 		{
 			if (ModelState.IsValid)
 			{
@@ -95,7 +95,8 @@ namespace FurrySystem.Controllers
 		public ActionResult DeleteConfirmed(int id)
 		{
 			var phoneTariff = db.PhoneTariffs.Find(id);
-			db.PhoneTariffs.Remove(phoneTariff);
+			phoneTariff.IsDeleted = true;
+			//db.PhoneTariffs.Remove(phoneTariff);
 			db.SaveChanges();
 			return RedirectToAction("Index");
 		}

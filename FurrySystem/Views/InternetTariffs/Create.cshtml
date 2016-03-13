@@ -1,4 +1,4 @@
-﻿@model FurrySystem.Models.InternetTariff
+﻿@model FurrySystem.DataLayer.InternetTariff
 
 @{
 	ViewBag.Title = "Create";
@@ -12,13 +12,14 @@
 
 	<div class="form-horizontal">
 		<h4>Internet Tariff</h4>
-		<hr/>
+		<hr />
 		@Html.ValidationSummary(true)
 
 		@{
 			foreach (ModelMetadata property in ViewData.ModelMetadata.Properties)
 			{
-				if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase))
+				if (string.Equals(property.PropertyName, "Id", StringComparison.InvariantCultureIgnoreCase) ||
+					string.Equals(property.PropertyName, "IsDeleted", StringComparison.InvariantCultureIgnoreCase))
 				{
 					continue;
 				}
@@ -35,11 +36,11 @@
 
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="Save" class="btn btn-default"/>
+				<input type="submit" value="Save" class="btn btn-default" />
 			</div>
 		</div>
 	</div>
-}
+			}
 
 <div>
 	@Html.ActionLink("Back to List", "Index")

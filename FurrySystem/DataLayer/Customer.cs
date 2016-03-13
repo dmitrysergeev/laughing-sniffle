@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FurrySystem.Models
+namespace FurrySystem.DataLayer
 {
 	public class Customer
 	{

@@ -31,10 +31,18 @@ input[type="checkbox"].input-validation-error { border: 0 none; }
 .validation-summary-valid { display: none; }
 
 h1.logo {
-	background: url(../Images/logo.png) no-repeat top left;
 	display: block;
-	height: 71px;
-	text-indent: -9999px; /* hides the link text */
+	height: 55px;
+	float: none;
+}
+
+h1.logo:before {
+	content: "";
+	background: url(../Images/364.gif) no-repeat top left;
+	display: block;
+	width:75px;
+	height: 55px;
+	float: left;
 }
 
 .search-type {
@@ -48,4 +56,16 @@ h1.logo {
 
 .mtxl {
 	margin-top: 20px;
+}
+
+th.controls {
+	width: 150px;
+}
+
+th.controls-slim {
+	width: 75px;
+}
+
+.navbar-right-fix {
+	margin-right: 0 !important;
 }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using FurrySystem.Models;
+using FurrySystem.DataLayer;
 
 namespace FurrySystem.Controllers
 {
@@ -37,7 +37,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "Id,Name,BandwidthLimit")] InternetTariff internetTariff)
+		public ActionResult Create([Bind(Include = "Id,Name,BandwidthLimit,IsDeleted")] InternetTariff internetTariff)
 		{
 			if (ModelState.IsValid)
 			{
@@ -65,7 +65,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Name,BandwidthLimit")] InternetTariff internetTariff)
+		public ActionResult Edit([Bind(Include = "Id,Name,BandwidthLimit,IsDeleted")] InternetTariff internetTariff)
 		{
 			if (ModelState.IsValid)
 			{
@@ -95,7 +95,8 @@ namespace FurrySystem.Controllers
 		public ActionResult DeleteConfirmed(int id)
 		{
 			var internetTariff = db.InternetTariffs.Find(id);
-			db.InternetTariffs.Remove(internetTariff);
+			internetTariff.IsDeleted = true;
+			//db.InternetTariffs.Remove(internetTariff);
 			db.SaveChanges();
 			return RedirectToAction("Index");
 		}

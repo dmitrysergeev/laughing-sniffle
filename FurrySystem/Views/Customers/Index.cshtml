@@ -1,5 +1,5 @@
 ﻿@using FurrySystem.Models
-@model IEnumerable<FurrySystem.Models.Customer>
+@model IEnumerable<FurrySystem.DataLayer.Customer>
 
 @{
 	ViewBag.Title = "Index";
@@ -57,7 +57,7 @@
 		<th>
 			@Html.DisplayNameFor(model => model.IsDeleted)
 		</th>
-		<th></th>
+		<th class="controls"></th>
 	</tr>
 
 	@foreach (var item in Model)
