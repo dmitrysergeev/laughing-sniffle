@@ -1,0 +1,59 @@
+﻿@model FurrySystem.Models.StatisticsModel
+
+@Scripts.Render("~/Scripts/chart.js")
+
+<h2>Statistics</h2>
+
+@using (Html.BeginForm())
+{
+	<div class="form-horizontal">
+		<h4>Select operator and interval</h4>
+		<hr />
+		@Html.ValidationSummary(true)
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.OperatorId, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownListFor(model => model.OperatorId, new SelectList(Model.Users, "Key", "Value"), new { @style = "height: 25px;" })
+				@Html.ValidationMessageFor(model => model.OperatorId)
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.StartDate)
+				@Html.ValidationMessageFor(model => model.StartDate)
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.EndDate)
+				@Html.ValidationMessageFor(model => model.EndDate)
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Show" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+<h4>Internet orders</h4>
+<hr />
+
+@Html.Partial("_OrdersDataChart", Model.InternetOrdersData)
+
+<h4>Phone orders</h4>
+<hr />
+
+@Html.Partial("_OrdersDataChart", Model.PhoneOrdersData)
+
+<h4>Tv orders</h4>
+<hr />
+
+@Html.Partial("_OrdersDataChart", Model.TvOrdersData)

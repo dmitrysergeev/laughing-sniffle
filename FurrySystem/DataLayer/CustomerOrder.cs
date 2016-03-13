@@ -18,5 +18,8 @@ namespace FurrySystem.DataLayer
 		public virtual bool Disabled { get; set; }
 
 		public virtual DateTime? DisabledDate { get; set; }
+
+		[Required]
+		public string OperatorUserId { get; set; }
 	}
 }

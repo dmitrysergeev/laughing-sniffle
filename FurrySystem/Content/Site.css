@@ -54,6 +54,18 @@ h1.logo:before {
 	margin-left: 10px;
 }
 
+.mbm {
+	margin-bottom: 10px;
+}
+
+.mtm {
+	margin-top: 10px;
+}
+
+.mbxxxl {
+	margin-bottom: 30px;
+}
+
 .mtxl {
 	margin-top: 20px;
 }
@@ -68,4 +80,8 @@ th.controls-slim {
 
 .navbar-right-fix {
 	margin-right: 0 !important;
+}
+
+p.index-tip {
+	height: 36px;
 }

@@ -1,0 +1,46 @@
+﻿@using Chart.Mvc.ComplexChart
+@using Chart.Mvc.Extensions
+
+@model FurrySystem.Models.OrdersData
+
+@{
+	var name = Math.Abs(Guid.NewGuid().GetHashCode()).ToString();
+
+	var lineChart = new LineChart();
+	lineChart.ComplexData.Labels.AddRange(Model.Keys);
+	lineChart.ComplexData.Datasets.AddRange(new List<ComplexDataset>
+	{
+		new ComplexDataset
+		{
+			Data = Model.NewOrders,
+			Label = "New orders",
+			FillColor = "rgba(220,220,220,0.2)",
+			StrokeColor = "rgba(220,220,220,1)",
+			PointColor = "rgba(220,220,220,1)",
+			PointStrokeColor = "#fff",
+			PointHighlightFill = "#fff",
+			PointHighlightStroke = "rgba(220,220,220,1)"
+		},
+		new ComplexDataset {
+			Data = Model.DisabledOrders,
+			Label = "Disabled orders",
+			FillColor = "rgba(239,47,26,0.15)",
+			StrokeColor = "rgba(239,47,26,1)",
+			PointColor = "rgba(239,47,26,1)",
+			PointStrokeColor = "#fff",
+			PointHighlightFill = "#fff",
+			PointHighlightStroke = "rgba(239,47,26,1)"
+		}
+	});
+	lineChart.ChartConfiguration.Responsive = true;
+	lineChart.ChartConfiguration.ScaleBeginAtZero = true;
+}
+<div class="mtm mbxxxl">
+	<p>
+		Total <b>@Model.NewOrders.Sum()</b> new orders and <b>@Model.DisabledOrders.Sum()</b> disabled orders between
+		@Model.Keys.FirstOrDefault() and @Model.Keys.LastOrDefault()
+	</p>
+	<canvas id="canvas_@name" width="1140" height="400"></canvas>
+</div>
+
+@Html.CreateChart("canvas_" + name, lineChart)

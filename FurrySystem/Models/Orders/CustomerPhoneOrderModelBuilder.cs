@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
+using System.Web;
 using FurrySystem.DataLayer;
+using Microsoft.AspNet.Identity;
 
 namespace FurrySystem.Models.Orders
 {
@@ -26,6 +28,7 @@ namespace FurrySystem.Models.Orders
 		{
 			var tariff = dbContext.PhoneTariffs.Find(model.TariffId);
 			var customer = dbContext.Customers.Find(model.CustomerId);
+			var operatorId = HttpContext.Current.User.Identity.GetUserId();
 
 			return new CustomerPhoneOrder
 			{
@@ -33,7 +36,8 @@ namespace FurrySystem.Models.Orders
 				Tariff = tariff,
 				Customer = customer,
 				IsIpTelephone = model.IsIpTelephone,
-				Disabled = false
+				Disabled = false,
+				OperatorUserId = operatorId
 			};
 		}
 	}

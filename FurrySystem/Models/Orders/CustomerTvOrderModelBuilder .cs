@@ -1,5 +1,7 @@
 using System;
+using System.Web;
 using FurrySystem.DataLayer;
+using Microsoft.AspNet.Identity;
 
 namespace FurrySystem.Models.Orders
 {
@@ -23,12 +25,14 @@ namespace FurrySystem.Models.Orders
 		public CustomerTvOrder BuildCustomerTvOrder(CustomerTvOrderModel model)
 		{
 			var customer = dbContext.Customers.Find(model.CustomerId);
+			var operatorId = HttpContext.Current.User.Identity.GetUserId();
 
 			return new CustomerTvOrder
 			{
 				OrderDate = DateTime.Now,
 				Customer = customer,
-				Disabled = false
+				Disabled = false,
+				OperatorUserId = operatorId
 			};
 		}
 	}
