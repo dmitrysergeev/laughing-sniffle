@@ -8,7 +8,7 @@ using FurrySystem.Models.Orders;
 
 namespace FurrySystem.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = Authorization.Roles.CanEdit)]
 	public class CustomersOrdersController : Controller
 	{
 		private readonly ApplicationDbContext db = new ApplicationDbContext();

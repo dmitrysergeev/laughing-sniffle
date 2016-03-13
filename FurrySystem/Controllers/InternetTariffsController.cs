@@ -37,6 +37,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Authorization.Roles.CanEdit)]
 		public ActionResult Create([Bind(Include = "Id,Name,BandwidthLimit,IsDeleted")] InternetTariff internetTariff)
 		{
 			if (ModelState.IsValid)
@@ -65,6 +66,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Authorization.Roles.CanEdit)]
 		public ActionResult Edit([Bind(Include = "Id,Name,BandwidthLimit,IsDeleted")] InternetTariff internetTariff)
 		{
 			if (ModelState.IsValid)
@@ -92,6 +94,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Authorization.Roles.CanEdit)]
 		public ActionResult DeleteConfirmed(int id)
 		{
 			var internetTariff = db.InternetTariffs.Find(id);
