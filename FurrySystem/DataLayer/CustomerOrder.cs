@@ -20,6 +20,8 @@ namespace FurrySystem.DataLayer
 		public virtual DateTime? DisabledDate { get; set; }
 
 		[Required]
-		public string OperatorUserId { get; set; }
+		public virtual string CreateOperatorUserId { get; set; }
+
+		public virtual string DisableOperatorUserId { get; set; }
 	}
 }

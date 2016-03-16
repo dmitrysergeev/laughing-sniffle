@@ -33,7 +33,9 @@ namespace FurrySystem.Models
 
 		private OrdersData GetOrderData<T>(DbSet<T> set, string operatorId, DateTime? startDate, DateTime? endDate) where T : CustomerOrder
 		{
-			var list = (string.IsNullOrEmpty(operatorId) ? set : set.Where(x => x.OperatorUserId == operatorId))
+			var hasOperatorId = !string.IsNullOrEmpty(operatorId);
+
+			var list = (hasOperatorId ? set.Where(x => x.CreateOperatorUserId == operatorId || x.DisableOperatorUserId == operatorId) : set)
 				.Where(x=>!startDate.HasValue || x.OrderDate >= startDate.Value)
 				.Where(x=>!endDate.HasValue || x.OrderDate <= endDate.Value)
 				.AsEnumerable()
@@ -47,8 +49,8 @@ namespace FurrySystem.Models
 			return new OrdersData
 			{
 				Keys = list.Select(x => x.Key.ToShortDateString()),
-				NewOrders = list.Select(x => (double)x.Count()).ToList(),
-				DisabledOrders = list.Select(x => (double)x.Count(y => y.Disabled)).ToList()
+				NewOrders = list.Select(x => (double)x.Count(y => !hasOperatorId || y.CreateOperatorUserId == operatorId)).ToList(),
+				DisabledOrders = list.Select(x => (double)x.Count(y => y.Disabled && (!hasOperatorId || y.DisableOperatorUserId == operatorId))).ToList()
 			};
 		}
 	}

@@ -5,6 +5,7 @@ using System.Net;
 using System.Web.Mvc;
 using FurrySystem.DataLayer;
 using FurrySystem.Models.Orders;
+using Microsoft.AspNet.Identity;
 
 namespace FurrySystem.Controllers
 {
@@ -73,6 +74,7 @@ namespace FurrySystem.Controllers
 
 			order.Disabled = true;
 			order.DisabledDate = DateTime.Now;
+			order.DisableOperatorUserId = GetCurrentUserId();
 			db.SaveChanges();
 
 			if (customerId.HasValue)
@@ -134,8 +136,7 @@ namespace FurrySystem.Controllers
 
 			order.Disabled = true;
 			order.DisabledDate = DateTime.Now;
-			//db.CustomerPhoneOrders.Attach(order);
-			//db.Entry(order).Property(x => x.Disabled).IsModified = true;
+			order.DisableOperatorUserId = GetCurrentUserId();
 			db.SaveChanges();
 
 			if (customerId.HasValue)
@@ -197,8 +198,7 @@ namespace FurrySystem.Controllers
 
 			order.Disabled = true;
 			order.DisabledDate = DateTime.Now;
-			//db.CustomerPhoneOrders.Attach(order);
-			//db.Entry(order).Property(x => x.Disabled).IsModified = true;
+			order.DisableOperatorUserId = GetCurrentUserId();
 			db.SaveChanges();
 
 			if (customerId.HasValue)
@@ -209,6 +209,10 @@ namespace FurrySystem.Controllers
 
 		#endregion
 
+		private string GetCurrentUserId()
+		{
+			return User.Identity.GetUserId();
+		}
 
 		protected override void Dispose(bool disposing)
 		{

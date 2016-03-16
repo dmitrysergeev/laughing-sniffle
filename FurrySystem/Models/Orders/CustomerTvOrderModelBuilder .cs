@@ -32,7 +32,7 @@ namespace FurrySystem.Models.Orders
 				OrderDate = DateTime.Now,
 				Customer = customer,
 				Disabled = false,
-				OperatorUserId = operatorId
+				CreateOperatorUserId = operatorId
 			};
 		}
 	}

@@ -37,7 +37,7 @@ namespace FurrySystem.Models.Orders
 				Customer = customer,
 				AddRouter = model.AddRouter,
 				Disabled = false,
-				OperatorUserId = operatorId
+				CreateOperatorUserId = operatorId
 			};
 		}
 	}

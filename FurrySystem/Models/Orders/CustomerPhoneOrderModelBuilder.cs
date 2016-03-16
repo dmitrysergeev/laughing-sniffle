@@ -37,7 +37,7 @@ namespace FurrySystem.Models.Orders
 				Customer = customer,
 				IsIpTelephone = model.IsIpTelephone,
 				Disabled = false,
-				OperatorUserId = operatorId
+				CreateOperatorUserId = operatorId
 			};
 		}
 	}
