@@ -50,7 +50,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = Authorization.Roles.CanEdit)]
+		[Authorize(Roles = Authorization.Roles.CanCreate)]
 		public ActionResult Create([Bind(Include = "Id,Inn,Name,Activity,ContactPerson,Email,Address,LegalAddress,HeadPosition,Fio")] Customer customer)
 		{
 			if (ModelState.IsValid)
@@ -79,7 +79,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = Authorization.Roles.CanEdit)]
+		[Authorize(Roles = Authorization.Roles.CanCreate)]
 		public ActionResult Edit([Bind(Include = "Id,Inn,Name,Activity,ContactPerson,Email,Address,LegalAddress,HeadPosition,Fio")] Customer customer)
 		{
 			if (ModelState.IsValid)
@@ -107,7 +107,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = Authorization.Roles.CanEdit)]
+		[Authorize(Roles = Authorization.Roles.CanDelete)]
 		public ActionResult DeleteConfirmed(int id)
 		{
 			var customer = db.Customers.Find(id);

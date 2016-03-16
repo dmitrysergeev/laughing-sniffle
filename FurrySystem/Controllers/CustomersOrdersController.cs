@@ -8,7 +8,6 @@ using FurrySystem.Models.Orders;
 
 namespace FurrySystem.Controllers
 {
-	[Authorize(Roles = Authorization.Roles.CanEdit)]
 	public class CustomersOrdersController : Controller
 	{
 		private readonly ApplicationDbContext db = new ApplicationDbContext();
@@ -41,6 +40,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Authorization.Roles.CanCreate)]
 		public ActionResult CreateInternetOrder([Bind(Include = "CustomerId,TariffId,AddRouter")] CustomerInternetOrderModel model)
 		{
 			if (ModelState.IsValid)
@@ -55,6 +55,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost, ActionName("DeleteInternetOrder")]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Authorization.Roles.CanDelete)]
 		public ActionResult DeleteInternetOrder(int? id, int? customerId)
 		{
 			if (id == null)
@@ -100,6 +101,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Authorization.Roles.CanCreate)]
 		public ActionResult CreatePhoneOrder([Bind(Include = "CustomerId,TariffId,IsIpTelephone")] CustomerPhoneOrderModel model)
 		{
 			if (ModelState.IsValid)
@@ -114,6 +116,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost, ActionName("DeletePhoneOrder")]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Authorization.Roles.CanDelete)]
 		public ActionResult DeletePhoneOrder(int? id, int? customerId)
 		{
 			if (id == null)
@@ -162,6 +165,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Authorization.Roles.CanCreate)]
 		public ActionResult CreateTvOrder([Bind(Include = "CustomerId")] CustomerTvOrderModel model)
 		{
 			if (ModelState.IsValid)
@@ -176,6 +180,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost, ActionName("DeleteTvOrder")]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Authorization.Roles.CanDelete)]
 		public ActionResult DeleteTvOrder(int? id, int? customerId)
 		{
 			if (id == null)

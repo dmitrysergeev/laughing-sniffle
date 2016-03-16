@@ -37,7 +37,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = Authorization.Roles.CanEdit)]
+		[Authorize(Roles = Authorization.Roles.CanCreate)]
 		public ActionResult Create([Bind(Include = "Id,Name,HasLimit,IsDeleted")] PhoneTariff phoneTariff)
 		{
 			if (ModelState.IsValid)
@@ -66,7 +66,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = Authorization.Roles.CanEdit)]
+		[Authorize(Roles = Authorization.Roles.CanCreate)]
 		public ActionResult Edit([Bind(Include = "Id,Name,HasLimit,IsDeleted")] PhoneTariff phoneTariff)
 		{
 			if (ModelState.IsValid)
@@ -94,7 +94,7 @@ namespace FurrySystem.Controllers
 
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = Authorization.Roles.CanEdit)]
+		[Authorize(Roles = Authorization.Roles.CanDelete)]
 		public ActionResult DeleteConfirmed(int id)
 		{
 			var phoneTariff = db.PhoneTariffs.Find(id);
