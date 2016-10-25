@@ -282,6 +282,7 @@
     <Content Include="Views\Shared\_CustomerTvOrders.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Shared\_OrdersDataChart.cshtml" />
+    <Content Include="Views\Statistics\Prediction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

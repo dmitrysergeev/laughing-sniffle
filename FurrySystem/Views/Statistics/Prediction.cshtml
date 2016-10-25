@@ -1,0 +1,50 @@
+﻿@model FurrySystem.Models.StatisticsModel
+
+@Scripts.Render("~/Scripts/chart.js")
+
+<h2>Prediction</h2>
+
+@using (Html.BeginForm())
+{
+	<table class="table">
+		<thead>
+		<tr>
+			<th></th>
+			<th colspan="4">
+				Quarter
+			</th>
+		</tr>
+		<tr>
+			<th></th>
+			<th>I</th>
+			<th>II</th>
+			<th>III</th>
+			<th>IV</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Previous year</td>
+			<td>1200</td>
+			<td>700</td>
+			<td>900</td>
+			<td>1100</td>
+		</tr>
+		<tr>
+			<td>This year</td>
+			<td>1400</td>
+			<td>1000</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Prediction</td>
+			<td>975</td>
+			<td>1060</td>
+			<td>1048</td>
+			<td></td>
+		</tr>
+		</tbody>
+	</table>
+	<input type="submit" value="Calculate" class="btn btn-default" />
+}

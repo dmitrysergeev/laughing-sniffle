@@ -28,6 +28,11 @@ namespace FurrySystem.Controllers
 			return View(model);
 		}
 
+		public ActionResult Prediction()
+		{
+			return View();
+		}
+
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
